@@ -202,8 +202,6 @@ __tools__ = {
                 ActionChains(driver).send_keys("What is the current time?").send_keys(Keys.RETURN).perform()
                 time.sleep(30)
 
-                # You might want to add verification for the tool's response here
-                # For example:
                 try:
                     response = wait.until(
                         EC.presence_of_element_located(
