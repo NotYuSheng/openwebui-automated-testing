@@ -75,8 +75,8 @@ def main():
         upload_button.click()
         
         time.sleep(2)
-
-        pyautogui.write(r"C:\Users\blonew\Downloads\test_rag.txt")
+        # Modify example file path
+        pyautogui.write(r"C:\Users\123\Downloads\test_rag.txt")
         pyautogui.press("enter")
         
         time.sleep(30)
@@ -88,7 +88,7 @@ def main():
         )
         chat_input.send_keys(Keys.RETURN)
         time.sleep(120)
-
+        # Modify expected response
         chatbot_response = wait.until(
             EC.presence_of_element_located(
                 (
