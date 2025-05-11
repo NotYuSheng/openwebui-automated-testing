@@ -4,7 +4,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
-import pyautogui
 import pyperclip
 import time
 
@@ -590,8 +589,8 @@ class Pipe:
                 if popup_close.is_displayed():
                     popup_close.click()
                     time.sleep(1)
-            except:
-                print("ℹ️ No update popup found, continuing.")
+            except Exception as e:
+                print(f"ℹ️ No update popup found: {e}")
 
             # Click Save
             save_button = wait.until(
@@ -640,7 +639,7 @@ class Pipe:
                     ))
                     api_key_input.click()
                     api_key_input.clear()
-                    # Modify Api Key
+                    # Add Api Key
                     api_key_input.send_keys("")
                     time.sleep(5)
 
@@ -687,6 +686,7 @@ class Pipe:
                             (By.XPATH, "//div[contains(text(), 'Current Time')]")
                         )
                     )
+                    print(f"✅ Tool response received: {response.text}")
                 except Exception as e:
                     print(f"❌ No tool response detected: {e}")
 
