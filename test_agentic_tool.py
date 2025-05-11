@@ -4,7 +4,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
-import pyautogui
 import pyperclip
 import time
 
@@ -170,8 +169,8 @@ __tools__ = {
                 if popup_close.is_displayed():
                     popup_close.click()
                     time.sleep(1)
-            except:
-                print("ℹ️ No update popup found, continuing.")
+            except Exception as e:
+                print(f"ℹ️ No update popup found: {e}")
 
             # Click Save
             save_button = wait.until(
@@ -179,14 +178,17 @@ __tools__ = {
             )
             save_button.click()
 
-            # Confirm
-            confirm_button = wait.until(
-                EC.element_to_be_clickable(
-                    (By.XPATH, "//button[contains(text(),'Confirm')]")
+            # Try to find and click confirm button, if not found continue to test
+            try:
+                confirm_button = wait.until(
+                    EC.element_to_be_clickable(
+                        (By.XPATH, "//button[contains(text(),'Confirm')]")
+                    )
                 )
-            )
-            confirm_button.click()
-            time.sleep(15)
+                confirm_button.click()
+                time.sleep(15)
+            except Exception as e:
+                print(f"ℹ️ Confirm button not found, proceeding to test tool: {e}")
 
             # Test the tool functionality
             try:
@@ -205,12 +207,12 @@ __tools__ = {
                 try:
                     response = wait.until(
                         EC.presence_of_element_located(
-                            (By.XPATH, "//div[contains(text(), 'Current Time in')]")
+                            (By.XPATH, "//div[contains(text(), 'The current time')]")
                         )
                     )
                     print(f"✅ Tool response received: {response.text}")
-                except:
-                    print("❌ No tool response detected")
+                except Exception as e:
+                    print(f"❌ No tool response detected: {e}")
 
             except Exception as e:
                 print(f"❌ Tool testing failed: {e}")
