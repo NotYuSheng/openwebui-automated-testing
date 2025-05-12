@@ -1,4 +1,4 @@
-from selenium import webdriver
+afrom selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -639,8 +639,7 @@ class Pipe:
                     ))
                     api_key_input.click()
                     api_key_input.clear()
-                    # Add Api Key
-                    api_key_input.send_keys("")
+                    api_key_input.send_keys("") # Add OpenApi Key inside the quotes
                     time.sleep(5)
 
                     model_id_input = wait.until(EC.element_to_be_clickable(
