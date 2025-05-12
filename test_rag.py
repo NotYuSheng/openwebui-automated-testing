@@ -74,7 +74,7 @@ def main():
             
             time.sleep(2)
 
-            pyautogui.write(r"./sample-files/testrag.txt")
+            pyautogui.write(r"./sample-files/testrag.txt")  # Replace with your file path
             pyautogui.press("enter")
             
             time.sleep(30)
